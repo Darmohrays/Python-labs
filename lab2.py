@@ -29,8 +29,6 @@ def f1():
             b2.write(temp.lower())
     return words
 
-f1()
-
 #2.3
 def f2(wordsArr):
     words = etree.Element("words")
@@ -49,16 +47,17 @@ f2(f1())
 def f3():
     with open("a.txt", 'r') as f:
         wordsList = f.read().replace('\n', '')
-
     endings = []
     words = etree.Element("words")
-    temp = re.findall(r'\w\w\w\b', wordsList)
+    temp = re.findall(r'\B\w\w\w\b', wordsList)
     endings = list(OrderedDict(izip(temp, repeat(None))))
     for ending in endings:
-        wordsWithSameEnding = re.findall(re.compile(ending + '\b'), wordsList)
-        etree.SubElement(words, "ending", end = ending)
-        for w in wordsWithSameEnding:
-            etree.SubElement(ending, "word", word = w)
+        newEnding = etree.SubElement(words, "end", ending = ending)
+        reg = "\w{1,}" + str(ending) + "\\b"
+        wordsWithSameEnding = re.findall(reg, wordsList)
+        for word in wordsWithSameEnding:
+            etree.SubElement(newEnding, "word", word = word)
+                
     tree = etree.ElementTree(words)
     tree.write("c.xml")
 
