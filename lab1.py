@@ -45,5 +45,5 @@ for sublist in arr:
 				arr1.append(i)
 		else:
 			arr1.append(item)
-print arr1
+print(arr1)
 	

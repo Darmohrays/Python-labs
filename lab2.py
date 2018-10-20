@@ -9,7 +9,7 @@ def f(n):
     output = file.readlines()[0:n]
     return output
 
-print f(2)
+print (f(2))
 
 #2.2
 def f1():

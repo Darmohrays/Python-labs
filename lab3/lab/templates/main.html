@@ -1,0 +1,25 @@
+{% extends "start.html" %}
+{% block body_block %}
+    <h2>Your transactions</h2>
+
+    <table border="1">
+            <thead>
+                <th>Sender</th>
+                <th>Receiver</th>
+                <th>Sum</th>
+                <th>Date</th>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                    {% if transaction.receiver_name == user.username or transaction.sender_name == user.username %}
+                        <tr>
+                            <td><center> {{ transaction.sender_name }}</center></td>
+                            <td><center> {{ transaction.receiver_name }}</center></td>
+                            <td><center> {{ transaction.sum }}</center></td>
+                            <td><center> {{ transaction.transaction_date }} </center></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+    </table>
+{% endblock %}

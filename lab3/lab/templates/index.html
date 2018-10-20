@@ -1,0 +1,21 @@
+{% extends "start.html" %}
+{% block body_block %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome!</h1>
+  
+    {% if user.is_authenticated  %}
+        <h2>Hello {{ user.username }}! Your balance = {{ balance }} </h2>
+        <h5> <a href="{% url 'main' %}"> See all transactions </a></h5>
+        <form action = "lab/makeTransaction/" method="post">
+            {% csrf_token %}
+            <input for="receiver_name" type="text" name="receiver_name" id="receiver_name" placeholder="Receiver name" placeholderColor = "warning">
+            <input for="sum" type="number" name="sum" id="sum" placeholder="Sum" placeholderColor = "warning">
+            <button type="submit" value="makeTransaction" >Make transaction</button>
+        </form>
+    {% else %}
+        <h3>Please, login or register</h3>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
