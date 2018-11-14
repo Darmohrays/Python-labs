@@ -32,7 +32,11 @@ def user_login(request):
         if user is not None:
             if user.is_active:
                 login(request,user)
-                client = Client.objects.get(name = username)
+                try:
+                    client = Client.objects.get(name = username)
+                except Client.DoesNotExist:
+                    client = Client(name = username, balance = 0)
+                    client.save()
                 balance = client.balance
                 context = {'balance': balance}
                 return render(request,'index.html', context)

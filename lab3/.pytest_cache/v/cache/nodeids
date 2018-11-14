@@ -1,0 +1,9 @@
+[
+  "lab/pytest.py::ClientTest::test_song",
+  "lab/pytest.py::TransactionTest::test_transaction",
+  "lab/pytest.py::TestUrls::test_index",
+  "lab/pytest.py::TestUrls::test_main",
+  "lab/pytest.py::TestUrls::test_registration",
+  "lab/pytest.py::TestViews::test_login",
+  "lab/pytest.py::TestViews::test_registration"
+]
