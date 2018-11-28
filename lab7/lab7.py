@@ -7,24 +7,26 @@ plt.rcParams['figure.figsize'] = (10, 5)
 
 df = pd.read_csv('NYC_Jobs.csv')
 
-print(df[['Agency']] [:10])
+#print(df[['Agency']] [:10])
 
-print(df[['Agency', 'Business Title', 'Work Location 1']] [0:])
+#print(df[['Agency', 'Business Title', 'Work Location']])
 
 agency_counts = df['Agency'].value_counts()
 
-print(agency_counts)
+#print(agency_counts)
 
 agency_counts[:10].plot(kind='bar')
 plt.show()
 
-gp3 = df.groupby(['Work Location'])['Salary Range From', 'Salary Range To'].mean()
+range_to = df['Salary Range To']
+range_from = df['Salary Range From']
 
-errors = gp3.std()
+s = (range_from + range_from)/2
 
-print(gp3)
+df['s'] = s
 
-fig, ax = plt.subplots()
+print(df['s'])
 
-gp3.plot.bar(yerr=errors, ax=ax)
+df.set_index('Work Location')['s'].plot(kind='bar')
+
 plt.show()
