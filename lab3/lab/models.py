@@ -9,14 +9,7 @@ class Client(models.Model):
         return self.name
 
 class Transaction(models.Model):
-    sender_name = models.CharField(max_length = 50)
+    sender = models.OneToOneField(Client, on_delete=models.CASCADE, related_name="sender")
     sum = models.IntegerField(default=0)
-    receiver_name = models.CharField(max_length = 50)
+    receiver = models.OneToOneField(Client, on_delete=models.CASCADE, related_name="receiver")
     transaction_date = models.DateTimeField(auto_now_add=True, blank=True)
-    def makeTransaction(self):
-        sender = Client.objects.get(name = self.sender_name)
-        sender.balance = int(sender.balance) - int(self.sum)
-        receiver = Client.objects.get(name = self.receiver_name)
-        receiver.balance = int(receiver.balance) + int(self.sum)
-        sender.save()
-        receiver.save()

@@ -11,10 +11,10 @@
             </thead>
             <tbody>
                 {% for transaction in transactions %}
-                    {% if transaction.receiver_name == user.username or transaction.sender_name == user.username %}
+                    {% if transaction.receiver.name == user.username or transaction.sender.name == user.username %}
                         <tr>
-                            <td><center> {{ transaction.sender_name }}</center></td>
-                            <td><center> {{ transaction.receiver_name }}</center></td>
+                            <td><center> {{ transaction.sender.name }}</center></td>
+                            <td><center> {{ transaction.receiver.name }}</center></td>
                             <td><center> {{ transaction.sum }}</center></td>
                             <td><center> {{ transaction.transaction_date }} </center></td>
                         </tr>

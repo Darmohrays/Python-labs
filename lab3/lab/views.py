@@ -81,9 +81,14 @@ def main(request):
 
 @login_required
 def makeTransaction(request):
-    transaction = Transaction(sender_name=request.user.username, sum=int(request.POST['sum']), receiver_name=request.POST['receiver_name'])
+    sender_name = request.user.username
+    receiver_name = request.POST['receiver_name']
+    sender = Client.objects.get(name=sender_name)
+    receiver = Client.objects.get(name=receiver_name)
+    transaction = Transaction(sender=sender, sum=int(request.POST['sum']), receiver=receiver)
     transaction.save()
-    transaction.makeTransaction()
+    sender.balance -= request.POST['sum']
+    receiver.balance += request.POST['sum']
     return HttpResponseRedirect(reverse('index'))
 
 @login_required
